@@ -1,4 +1,4 @@
-# Sparqit Speech-to-Speech Chatbot
+# Speech-to-Speech Chatbot
 
 > **Author:** Hugo Sanchez
 
@@ -10,6 +10,52 @@ Sparqit is a real-time, speech-to-speech chatbot powered by OpenAI's o4 model (G
 
 ---
 
+## Requirements
+
+- **Node.js:** v18 or higher is recommended.
+- **OpenAI API Key:** Required for both direct and relay server operation.
+- **Libraries/Packages:**
+
+### Main Dependencies
+- @openai/realtime-api-beta
+- dotenv
+- generator
+- katex
+- leaflet
+- llamaindex
+- next
+- react
+- react-dom
+- react-feather
+- react-katex
+- react-leaflet
+- sass
+- save
+- typescript
+- web-vitals
+- ws
+
+### Dev Dependencies
+- @testing-library/jest-dom
+- @testing-library/react
+- @testing-library/user-event
+- @types/jest
+- @types/leaflet
+- @types/node
+- @types/react
+- @types/react-dom
+- @types/react-katex
+- eslint
+- eslint-config-next
+- nodemon
+- postcss
+- prettier
+- tailwindcss
+- tsx
+- typescript
+
+---
+
 ## Features
 
 - **Speech-to-Speech Chat:** Talk to the AI and get spoken responses in real time.
@@ -18,6 +64,7 @@ Sparqit is a real-time, speech-to-speech chatbot powered by OpenAI's o4 model (G
 - **Customizable Personality:** Friendly, educational, and interactive (see `conversation_config.js`).
 - **Local Relay Server:** Optionally proxy API requests to hide your OpenAI key and add custom logic.
 - **Audio Visualization:** Real-time waveform/frequency bars for both input and output.
+- **Map Integration:** Visualizes locations and weather data via map components.
 - **Rich UI:** Modern, responsive interface with avatars, toggles, and action buttons.
 - **Math & Science Support:** AI can render formulas and derivations using MathML and KaTeX.
 
@@ -84,40 +131,40 @@ npm run generate
 ## Directory & File Guide
 
 ### Top-Level
-- `README.md` — **(Hugo Sanchez)** This file.
-- `package.json` — **(Hugo Sanchez)** Project metadata, dependencies, and scripts.
-- `next.config.mjs` — **(Hugo Sanchez)** Next.js configuration.
-- `tsconfig.json` — **(Hugo Sanchez)** TypeScript configuration.
-- `tailwind.config.ts` — **(Hugo Sanchez)** Tailwind CSS configuration.
-- `postcss.config.mjs` — **(Hugo Sanchez)** PostCSS configuration.
-- `public/` — **(Hugo Sanchez)** Static assets (images, HTML entrypoint).
-- `cache/` — **(Hugo Sanchez)** Stores document index and vector data for context retrieval.
+- `README.md` — This file.
+- `package.json` — Project metadata, dependencies, and scripts.
+- `next.config.mjs` — Next.js configuration.
+- `tsconfig.json` — TypeScript configuration.
+- `tailwind.config.ts` — Tailwind CSS configuration.
+- `postcss.config.mjs` — PostCSS configuration.
+- `public/` — Static assets (images, HTML entrypoint).
+- `cache/` — Stores document index and vector data for context retrieval.
 
 ### Frontend (`src/`)
-- `App.tsx` — **(Hugo Sanchez)** Main app wrapper, renders the ConsolePage.
-- `App.scss` — **(Hugo Sanchez)** App-level styles.
-- `index.css` — **(Hugo Sanchez)** Base CSS for the app.
-- `styles/globals.css` — **(Hugo Sanchez)** Global Tailwind and CSS variables.
-- `reportWebVitals.ts` — **(Hugo Sanchez)** Web Vitals performance reporting.
-- `setupTests.ts` — **(Hugo Sanchez)** Test setup for Jest/React Testing Library.
-- `react-app-env.d.ts` — **(Hugo Sanchez)** TypeScript environment types.
+- `App.tsx` — Main app wrapper, renders the ConsolePage.
+- `App.scss` — App-level styles.
+- `index.css` — Base CSS for the app.
+- `styles/globals.css` — Global Tailwind and CSS variables.
+- `reportWebVitals.ts` — Web Vitals performance reporting.
+- `setupTests.ts` — Test setup for Jest/React Testing Library.
+- `react-app-env.d.ts` — TypeScript environment types.
 
 #### Components (`src/components/`)
-- `button/Button.tsx` — **(Hugo Sanchez)** Reusable button component.
-- `button/Button.scss` — **(Hugo Sanchez)** Button styles.
-- `toggle/Toggle.tsx` — **(Hugo Sanchez)** Toggle switch component.
-- `toggle/Toggle.scss` — **(Hugo Sanchez)** Toggle styles.
-- `Map.tsx` — **(Hugo Sanchez)** Wrapper for dynamic map loading.
-- `MapComponent.tsx` — **(Hugo Sanchez)** Leaflet map display with marker and popup.
-- `Map.scss` — **(Hugo Sanchez)** Map styles.
+- `button/Button.tsx` — Reusable button component.
+- `button/Button.scss` — Button styles.
+- `toggle/Toggle.tsx` — Toggle switch component.
+- `toggle/Toggle.scss` — Toggle styles.
+- `Map.tsx` — Wrapper for dynamic map loading.
+- `MapComponent.tsx` — Leaflet map display with marker and popup.
+- `Map.scss` — Map styles.
 
 #### Pages (`src/pages/`)
-- `index.tsx` — **(Hugo Sanchez)** Main entry page, renders the App.
-- `_app.tsx` — **(Hugo Sanchez)** Next.js custom App for global styles.
-- `ConsolePage.tsx` — **(Hugo Sanchez)** Main chatbot UI and logic (avatar, audio, events, conversation, controls).
-- `ConsolePage.scss` — **(Hugo Sanchez)** Styles for the ConsolePage.
-- `api/context.ts` — **(Hugo Sanchez)** API route for injecting context from local document index.
-- `engine/` — **(Hugo Sanchez)** Document indexing and retrieval for context-aware AI.
+- `index.tsx` — Main entry page, renders the App.
+- `_app.tsx` — Next.js custom App for global styles.
+- `ConsolePage.tsx` — Main chatbot UI and logic (avatar, audio, events, conversation, controls).
+- `ConsolePage.scss` — Styles for the ConsolePage.
+- `api/context.ts` — API route for injecting context from local document index.
+- `engine/` — Document indexing and retrieval for context-aware AI.
   - `generate.ts` — Generates vector index from documents.
   - `index.ts` — Loads the vector index for retrieval.
   - `loader.ts` — Loads documents from the data directory.
@@ -125,22 +172,22 @@ npm run generate
   - `shared.ts` — Shared constants (e.g., cache dir).
 
 #### Utilities (`src/utils/`)
-- `conversation_config.js` — **(Hugo Sanchez)** System prompt and AI personality config.
-- `wav_renderer.ts` — **(Hugo Sanchez)** Audio waveform/frequency visualization.
+- `conversation_config.js` — System prompt and AI personality config.
+- `wav_renderer.ts` — Audio waveform/frequency visualization.
 
 #### Audio Tools (`src/lib/wavtools/`)
-- `index.js` — **(Hugo Sanchez)** Exports audio utilities.
-- `lib/wav_recorder.js` — **(Hugo Sanchez)** Audio recording utility (browser, worklet-based).
-- `lib/wav_stream_player.js` — **(Hugo Sanchez)** Audio playback utility (browser, worklet-based).
-- `lib/wav_packer.js` — **(Hugo Sanchez)** Packs audio data into WAV format.
-- `lib/analysis/audio_analysis.js` — **(Hugo Sanchez)** Frequency analysis for visualization.
-- `lib/analysis/constants.js` — **(Hugo Sanchez)** Frequency/note constants for analysis.
-- `lib/worklets/audio_processor.js` — **(Hugo Sanchez)** Audio recording worklet (browser thread).
-- `lib/worklets/stream_processor.js` — **(Hugo Sanchez)** Audio playback worklet (browser thread).
+- `index.js` — Exports audio utilities.
+- `lib/wav_recorder.js` — Audio recording utility (browser, worklet-based).
+- `lib/wav_stream_player.js` — Audio playback utility (browser, worklet-based).
+- `lib/wav_packer.js` — Packs audio data into WAV format.
+- `lib/analysis/audio_analysis.js` — Frequency analysis for visualization.
+- `lib/analysis/constants.js` — Frequency/note constants for analysis.
+- `lib/worklets/audio_processor.js` — Audio recording worklet (browser thread).
+- `lib/worklets/stream_processor.js` — Audio playback worklet (browser thread).
 
 #### Relay Server (`relay-server/`)
-- `index.js` — **(Hugo Sanchez)** Entry point for the relay server.
-- `lib/relay.js` — **(Hugo Sanchez)** WebSocket relay logic for proxying OpenAI traffic.
+- `index.js` — Entry point for the relay server.
+- `lib/relay.js` — WebSocket relay logic for proxying OpenAI traffic.
 
 ---
 
