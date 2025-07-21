@@ -1,0 +1,429 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+// Global KaTeX styling
+.katex {
+  font-size: 1em !important;
+  line-height: 1.2 !important;
+}
+
+.katex-display {
+  margin: 1em 0 !important;
+  text-align: center !important;
+}
+
+.katex-display>.katex {
+  display: inline-block;
+  text-align: center;
+  max-width: 100%;
+}
+
+[data-component='ConsolePage'] {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0px 8px;
+
+  &>div {
+    flex-shrink: 0;
+  }
+
+  .spacer {
+    flex-grow: 1;
+  }
+
+  .content-top {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    min-height: 40px;
+
+    .content-title {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .content-main {
+    flex-grow: 1;
+    flex-shrink: 1 !important;
+    margin: 0px 16px;
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 24px;
+
+    .content-block {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      max-height: 100%;
+      width: 100%;
+
+      .content-block-title {
+        flex-shrink: 0;
+        padding-top: 16px;
+        padding-bottom: 4px;
+        position: relative;
+      }
+
+      .content-block-body {
+        color: #6e6e7f;
+        position: relative;
+        flex-grow: 1;
+        padding: 8px 0px;
+        padding-top: 4px;
+        line-height: 1.2em;
+        overflow: auto;
+
+        &.full {
+          padding: 0px;
+        }
+      }
+    }
+
+    .content-right {
+      width: 300px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      margin-left: 24px;
+      gap: 24px;
+
+      &>div {
+        border-radius: 16px;
+        flex-grow: 1;
+        flex-shrink: 0;
+        overflow: hidden;
+        position: relative;
+
+        .content-block-title {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          line-height: 2em;
+          top: 16px;
+          left: 16px;
+          padding: 4px 16px;
+          background-color: #fff;
+          border-radius: 1000px;
+          min-height: 32px;
+          z-index: 9999;
+          text-align: center;
+          white-space: pre;
+
+          &.bottom {
+            top: auto;
+            bottom: 16px;
+            right: 16px;
+          }
+        }
+      }
+
+      &>div.kv {
+        height: 250px;
+        max-height: 250px;
+        white-space: pre;
+        background-color: #ececf1;
+
+        .content-block-body {
+          padding: 16px;
+          margin-top: 56px;
+        }
+      }
+    }
+
+    .content-logs {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+
+      &>div {
+        flex-grow: 1;
+      }
+
+      &>.content-actions {
+        flex-grow: 0;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+      }
+
+      &>div.events {
+        overflow: hidden;
+      }
+
+      .events {
+        border-top: 1px solid #e7e7e7;
+        height: 200px;
+        min-height: 0;
+        max-height: 200px;
+      }
+
+      .conversation {
+        display: flex;
+        flex-shrink: 0;
+        width: 100%;
+        overflow: hidden;
+        border-top: 1px solid #e7e7e7;
+      }
+    }
+  }
+
+  .conversation-item {
+    position: relative;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+
+    &:not(:hover) .close {
+      display: none;
+    }
+
+    .close {
+      position: absolute;
+      top: 0px;
+      right: -20px;
+      background: #aaa;
+      color: #fff;
+      display: flex;
+      border-radius: 16px;
+      padding: 2px;
+      cursor: pointer;
+
+      &:hover {
+        background: #696969;
+      }
+
+      svg {
+        stroke-width: 3;
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    .speaker {
+      position: relative;
+      text-align: left;
+      gap: 16px;
+      width: 80px;
+      flex-shrink: 0;
+      margin-right: 16px;
+
+      &.user {
+        color: #0099ff;
+      }
+
+      &.assistant {
+        color: #009900;
+      }
+    }
+
+    .speaker-content {
+      color: #18181b;
+      overflow: hidden;
+      word-wrap: break-word;
+      font-size: 13px;
+      line-height: 1.5;
+
+      // Math content styling
+      .katex {
+        font-size: 1em;
+      }
+
+      .katex-display {
+        margin: 1em 0;
+        text-align: center;
+      }
+
+      // Preserve spacing in mathematical content
+      span {
+        white-space: pre-wrap;
+      }
+    }
+  }
+
+  .event {
+    border-radius: 3px;
+    white-space: pre;
+    display: flex;
+    padding: 0px;
+    gap: 16px;
+
+    .event-timestamp {
+      text-align: left;
+      gap: 8px;
+      padding: 4px 0px;
+      width: 80px;
+      flex-shrink: 0;
+      margin-right: 16px;
+    }
+
+    .event-details {
+      display: flex;
+      flex-direction: column;
+      color: #18181b;
+      gap: 8px;
+
+      .event-summary {
+        padding: 4px 8px;
+        margin: 0px -8px;
+
+        &:hover {
+          border-radius: 8px;
+          background-color: #f0f0f0;
+        }
+
+        cursor: pointer;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        .event-source {
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          &.client {
+            color: #0099ff;
+          }
+
+          &.server {
+            color: #009900;
+          }
+
+          &.error {
+            color: #990000;
+          }
+
+          svg {
+            stroke-width: 3;
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  .visualization {
+    position: absolute;
+    display: flex;
+    bottom: 4px;
+    right: 8px;
+    padding: 4px;
+    border-radius: 16px;
+    z-index: 10;
+    gap: 2px;
+
+    .visualization-entry {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 40px;
+      width: 100px;
+      gap: 4px;
+
+      &.client {
+        color: #0099ff;
+      }
+
+      &.server {
+        color: #009900;
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+        color: currentColor;
+      }
+    }
+  }
+
+  .student-avatar-bar {
+
+    padding-top: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 8px auto; // sits near top; tweak as desired
+    pointer-events: none; // clicks pass through unless you want interaction
+  }
+
+  .student-avatar {
+    position: relative;
+    width: 350px; // tune to match Body.png natural size
+    height: 300px; // enough to hold both body + head
+    pointer-events: none;
+  }
+
+  .student-avatar__body,
+  .student-avatar__head {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 100%;
+    height: auto;
+    image-rendering: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  // Anchor body to bottom of container
+  .student-avatar__body {
+    bottom: 0;
+    mask-image: linear-gradient(to top, transparent, black);
+  }
+
+  // Heads overlap body. Adjust bottom offset so neck aligns with body.
+  .student-avatar__head {
+    padding-bottom: 120px;
+    bottom: 88px; // <-- tweak to where the neck of Head_* meets Body.png
+    opacity: 0;
+    transition: opacity 0.1s linear, transform 0.1s ease-out;
+  }
+
+  // Idle default visible
+  .student-avatar--idle .student-avatar__head--idle {
+    opacity: 1;
+  }
+
+  // Think: show think head + subtle bob
+  .student-avatar--think .student-avatar__head--think {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px) rotate(-1deg);
+  }
+
+  // Talk: show talk head + small mouth bounce via keyframes
+  .student-avatar--talk .student-avatar__head--talk {
+    opacity: 1;
+    animation: avatarTalk 0.35s ease-in-out infinite alternate;
+  }
+
+  @keyframes avatarTalk {
+    0% {
+      transform: translateX(-50%) translateY(0) scaleY(1.0) scaleX(1.0);
+    }
+
+    100% {
+      transform: translateX(-50%) translateY(5px) scaleY(1.00) scaleX(1.01);
+    }
+  }
+
+}
